@@ -145,3 +145,14 @@ a {
   position: relative;
   left: 45%;
 }
+
+.heading-container {
+  display: flex;
+  margin: 20px auto;
+}
+
+.heading {
+  height: 50px;
+  margin: auto;
+  font-size: 24px;
+}

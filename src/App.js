@@ -154,12 +154,12 @@ export default function App() {
 
   return (
     <>
-      {issues.length !== 0 && (
-        <>
-          <div style={{ marginBottom: "6%" }}></div>
-          <div className="app">{renderingArr}</div>
-        </>
-      )}
+      <div className="heading-container">
+        <h4 className="heading">
+          Github issue page replica - Infinite scrolling implemented
+        </h4>
+      </div>
+      {issues.length !== 0 && <div className="app">{renderingArr}</div>}
       {loading && <div className="loading">Loading....</div>}
     </>
   );
