@@ -1,4 +1,4 @@
-# Github-Issue-Page-Replica-with-Infinite-Scrolling
+# Github-Issue-Page-Replica-with-Infinite-Scrolling-using-Reactjs
 
 This repository contains a replica of the Github issue page that uses infinite scrolling. The replica is built using React, and it fetches data from the Github API.
 
