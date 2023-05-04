@@ -12,7 +12,7 @@ This repository contains a replica of the Github issue page that uses infinite s
 
 To get started with this project, follow these steps:
 
-1. Clone this repository to your local machine using `git clone https://github.com/your-username/Github-Issue-Page-Replica-with-Infinite-Scrolling.git`
+1. Clone this repository to your local machine using `git clone https://github.com/Saurabhgargiit/Github-Issue-Page-Replica-with-Infinite-Scrolling.git`
 2. Navigate to the project directory using `cd Github-Issue-Page-Replica-with-Infinite-Scrolling`
 3. Install the dependencies using `npm install`
 4. Start the development server using `npm start`
