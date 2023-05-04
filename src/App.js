@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
+//icons
 const bullet = (
   <svg
     viewBox="0 0 16 16"
@@ -35,6 +36,7 @@ const commentIcon = (
   </svg>
 );
 
+//helper function
 const days = (dateInfo) => {
   const today = new Date();
   const dateCreated = new Date(dateInfo);
@@ -46,41 +48,46 @@ const days = (dateInfo) => {
   else return `${dateCreated.getMonth()} ${dateCreated.getDate()}`;
 };
 
-const numperPage = 10;
-let pageNo = 0;
-let totalData = [];
-let displayedData = [];
-
-const scrollingData = (pageNo) => {
-  const len = displayedData.length;
-  if (len === totalData.length) displayedData.slice();
-  if (pageNo * numperPage > totalData.length) {
-    displayedData.push(...totalData.slice(len, totalData.length));
-  } else displayedData.push(...totalData.slice(len, pageNo * numperPage));
-  return displayedData.slice();
-};
-
 export default function App() {
   const [issues, setIssues] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const scrollHandler = () => {
+    if (
+      document.documentElement.clientHeight +
+        document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight
+    ) {
+      console.log(2);
+      setLoading(true);
+      let page = pageNo + 1;
+      axios
+        .get(`https://api.github.com/repos/facebook/react/issues?page=${page}`)
+        .then((res) => {
+          setIssues((prevState) => {
+            return [...prevState, ...res.data];
+          });
+          setLoading(false);
+          setPageNo(page);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   useEffect(() => {
     axios
-      .get(`https://api.github.com/repos/facebook/react/issues`)
+      .get(`https://api.github.com/repos/facebook/react/issues?page=1`)
       .then((res) => {
-        totalData = res.data.slice();
-        window.addEventListener("scroll", handleScroll);
-        setIssues(scrollingData(pageNo++));
+        setIssues(() => res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const handleScroll = () => {
-    let userScrollHeight = window.innerHeight + window.scrollY;
-    let windowBottomHeight = document.documentElement.offsetHeight;
-    if (userScrollHeight >= windowBottomHeight) {
-      setIssues(scrollingData(pageNo++));
-    }
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [issues]);
 
   const renderingArr =
     issues.length > 0 &&
@@ -145,10 +152,15 @@ export default function App() {
       );
     });
 
-  return issues.length ? (
+  return (
     <>
-      <div style={{ marginBottom: "6%" }}></div>
-      <div className="app">{renderingArr}</div>
+      {issues.length !== 0 && (
+        <>
+          <div style={{ marginBottom: "6%" }}></div>
+          <div className="app">{renderingArr}</div>
+        </>
+      )}
+      {loading && <div className="loading">Loading....</div>}
     </>
-  ) : null;
+  );
 }

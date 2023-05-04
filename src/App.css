@@ -137,3 +137,11 @@ a {
 .v-align-middle {
   vertical-align: middle;
 }
+
+.loading {
+  height: 50px;
+  width: 100%;
+  margin: 10px auto;
+  position: relative;
+  left: 45%;
+}
