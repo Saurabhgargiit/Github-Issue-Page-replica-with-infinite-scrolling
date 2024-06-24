@@ -17,8 +17,10 @@ To get started with this project, follow these steps:
 3. Install the dependencies using `npm install`
 4. Start the development server using `npm start`
 
-## Usage
+## Link
+https://rv2qdk-3000.csb.app/
 
-Once you have started the development server, you can access the replica by visiting `http://localhost:3000` in your web browser.
+## Screenshot
+<img width="1440" alt="Screenshot 2024-06-25 at 12 13 35 AM" src="https://github.com/Saurabhgargiit/Github-Issue-Page-replica-with-infinite-scrolling-using-reactJs/assets/15964659/14a54a20-b20d-492e-9c6f-18c7d691eb42">
 
-The issues are displayed on the page, each with its own label. You can click on a label to filter the issues by that label.
+
